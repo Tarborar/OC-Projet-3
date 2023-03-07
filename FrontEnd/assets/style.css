@@ -97,10 +97,13 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+	cursor: pointer;
 }
 #introduction {
 	display: flex;
 	align-items: center;
+	margin-bottom: 119px;
+	margin-top: 119px;
 }
 #introduction figure {
 	flex: 1
@@ -123,8 +126,41 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 51px;
 }
+
+.filtres{
+	margin-bottom: 51px;
+}
+
+.rangeFiltre{
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.boutonFiltre{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 37px;
+	min-width: 70px; /*100-2x15 du padding*/
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.fontFiltre{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #1D6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
