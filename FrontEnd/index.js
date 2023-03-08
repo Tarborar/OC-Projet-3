@@ -12,17 +12,12 @@ chargement();
 function genererPhotos(photos){
     for (let i = 0; i < photos.length; i++){
         const projet = photos[i];
-
         const sectionGallery = document.querySelector(".gallery");
-
         const photoElement = document.createElement("figure");
-
         const imageElement = document.createElement("img");
         imageElement.src = projet.imageUrl;
-
         const textElement = document.createElement("figcaption");
         textElement.innerText = projet.title;
-
         sectionGallery.appendChild(photoElement);
         photoElement.appendChild(imageElement);
         photoElement.appendChild(textElement);
@@ -41,7 +36,13 @@ class Filtreur {
     }
 }
 
-const filtrerTous = new Filtreur(".tous", photo => photo.category.name !== null);
-const filtrerObjets = new Filtreur(".objets", photo => photo.category.name === 'Objets');
-const filtrerAppartements = new Filtreur(".appartements", photo => photo.category.name === 'Appartements');
-const filtrerHotels = new Filtreur(".hotels", photo => photo.category.name === 'Hotels & restaurants');
+function activationFiltreur(){
+    const filtrerTous = new Filtreur(".tous", photo => photo.category.name !== null);
+    const filtrerObjets = new Filtreur(".objets", photo => photo.category.name === 'Objets');
+    const filtrerAppartements = new Filtreur(".appartements", photo => photo.category.name === 'Appartements');
+    const filtrerHotels = new Filtreur(".hotels", photo => photo.category.name === 'Hotels & restaurants');
+}
+
+activationFiltreur();
+
+

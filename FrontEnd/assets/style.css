@@ -52,14 +52,21 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #fffef8;
+	scroll-behavior: smooth;
 }
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
+
+#nomLogo:hover{
+	cursor: pointer;
+}
+
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -173,34 +180,34 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+.remplissage {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+.remplissage > * {
 	text-align: center;
 
 }
-#contact h2{
+.remplissage h2{
 	margin-bottom: 20px;
 }
-#contact form {
+.remplissage form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+.remplissage input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+.remplissage label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+.remplissage textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -219,6 +226,15 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+}
+
+footer{
+	background-color: white;
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+
 }
 
