@@ -47,13 +47,17 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+html{
+	scroll-behavior: smooth;
+}
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: #fffef8;
-	scroll-behavior: smooth;
 }
 header {
 	display: flex;
@@ -67,6 +71,16 @@ header {
 
 section {
 	margin: 50px 0;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+a:hover{
+	color: #B1663C;
+	cursor: pointer;
 }
 
 h1{
@@ -83,6 +97,18 @@ h1 > span {
 	font-size:10px;
 	letter-spacing: 0.1em;
 ;
+}
+
+.messageErreur{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 36px;
+	text-align: center;
+	color: #1D6154;
+	text-decoration: underline;
+	margin-bottom: 100px;
 }
 
 h2{
@@ -236,5 +262,15 @@ footer{
 	right: 0;
 	width: 100%;
 
+}
+
+#loginPage{
+	margin-top: 150px;
+}
+
+.remplissage form p{
+	text-align: center;
+	text-decoration: underline;
+	font-family: 'Work Sans';
 }
 
