@@ -259,6 +259,12 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	transition: background-color 0.1s;
+}
+
+input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: #0E2F28;
 }
 
 footer nav ul {
@@ -290,3 +296,51 @@ footer{
 	cursor: pointer;
 }
 
+.edition{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	background-color: black;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	gap: 21px;
+}
+
+.fa-pen-to-square{
+	width: 16px;
+	height: 16px;
+}
+
+.textEdition{
+	color: white;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+}
+
+.edition div{
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+}
+
+.buttonEdition{
+	height: 38px;
+	background-color: white;
+	border-radius: 999em;
+	padding-right: 23px;
+	padding-left: 23px;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+}

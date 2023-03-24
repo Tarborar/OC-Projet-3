@@ -38,7 +38,6 @@ function loadingWorks(works){
         sectionGallery.appendChild(photoElement);
         photoElement.appendChild(imageElement);
         photoElement.appendChild(textElement);
-
         /* 
         <figure>
             <img src="" alt="">
@@ -48,7 +47,7 @@ function loadingWorks(works){
     }
 }
 
-function loadingFilters(filtersName){
+async function loadingFilters(filtersName){
     const ulFilter = document.createElement("ul");
     ulFilter.classList.add("rangeFiltre", "fontFiltre");
     filtersName.unshift("Tous");
@@ -91,16 +90,7 @@ function loadingFilters(filtersName){
 
             sectionGallery.innerHTML = "";
             loadingWorks(filteredWorks);
+            
         });
     });    
 }
-
-
-
-
-
-
-
-
-
-
