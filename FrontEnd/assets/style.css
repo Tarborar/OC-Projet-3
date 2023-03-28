@@ -241,6 +241,19 @@ nav ul li:hover {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.remplissage input:focus, #message:focus{
+	outline: none;
+	box-shadow: 0 0 0 2px #1D6154;
+	transition: box-shadow 0.25s ease-in-out;
+}
+
+#message{
+	padding-left: 16px;
+	padding-right: 16px;
 }
 .remplissage label {
 	margin: 2em 0 1em 0;

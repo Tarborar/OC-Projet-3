@@ -34,14 +34,13 @@ form.addEventListener("submit", (event) => {
     if (response.ok) { // statut compris entre 200 et 299
       console.log("autorisé");
       window.location.href = "index.html";
-      return response.json();
     } else {
-      console.log("pas autorisé");
+      displaySubmitError(response.status);
     }
   })
   .then(data => {
     const token = data.token;
-    console.log(token);
+    sessionStorage.setItem("token", data.token);
   })
   .catch(error => console.error(error));
 });
@@ -55,3 +54,19 @@ const editionMode = `
       <button class="buttonEdition">publier les changements</button>
     </div>
   `;
+
+  function displaySubmitError(errorType){
+    switch (errorType){
+      case 401:
+        console.log("L'identifiant ou le mot de passe est incorrect");
+        emailInput.style.boxShadow = "0 0 0 2px #e74c3c";
+        passwordInput.style.boxShadow = "0 0 0 2px #e74c3c";
+        break;
+      case 404:
+        console.log("L'identifiant n'est pas reconnu dans la base de donnée");
+        emailInput.style.boxShadow = "0 0 0 2px #e74c3c";
+        break;
+      default:
+        console.log("on ne connait pas l'erreur");
+    }
+  }
