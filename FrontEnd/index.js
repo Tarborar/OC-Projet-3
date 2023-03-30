@@ -1,10 +1,19 @@
 const sectionGallery = document.querySelector(".gallery");
 const portfolio = document.querySelector("#portfolio");
 const filters = document.querySelector(".filtres");
+const modifyButtonEdition = document.querySelectorAll(".modifierButton");
+const modifyHeaderEdition = document.querySelector(".modifierHeader");
+const header = document.querySelector("header");
+const login = document.querySelector("#login");
+const displayAddWorkButton = document.querySelector("#ajouterProjet");
+const overlay = document.querySelector("#overlay");
+const body = document.querySelector("body");
 
 let works;
 let categories;
 let filtersName;
+let editMode = false;
+let addWorkModalInterface;
 
 const errorMessage = `
     <p class="messageErreur">
@@ -63,6 +72,13 @@ function displayWorks(works){ //reçois tous les works OU les filtredWorks
             <figcaption></figcaption>
         </figure>
         */
+
+        if (editMode === true){
+            const modalWorks = document.querySelector(".modalWorks"); //test modale
+            const imageModale = document.createElement("img");
+            imageModale.src = project.imageUrl;
+            modalWorks.appendChild(imageModale);
+        }
     }
 }
 
@@ -89,10 +105,10 @@ function displayFilters(filtersName){
     </ul>
     */
 
-   test();
+   filtering();
 }
 
-function test(){
+function filtering(){
     const filterButtons = document.querySelectorAll(".boutonFiltre"); //ici parce que la class boutonFiltre n'existe pas encore
 
     filterButtons.forEach(button => {
@@ -114,3 +130,75 @@ function test(){
         });
     }); 
 }
+
+if (sessionStorage.getItem('token')){
+    //Vérifie s'il y a un le token dans le session storage
+    console.log("Entre dans le mode édition");
+    editMode = true;
+    addEditionMode();
+} else {
+    console.log("Il n'y a pas le token dans le session storage");
+}
+
+function addEditionMode(){
+    const headerModeEdition = `
+    <div id="edition">
+        <div>
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p class="textEdition">Mode édition</p>
+        </div>
+        <button class="buttonEdition">publier les changements</button>
+    </div>
+    `;
+
+    const modifyModeEdition = `
+    <div class="modifier">
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p class="textModifier">modifier</p>
+    </div>
+    `;
+
+    login.innerHTML = "logout";
+
+    login.addEventListener("click", function() {
+        if(sessionStorage.getItem("token")) {
+            // Suppression de l'élément ayant la clé "myKey"
+            console.log("Retrait du token dans le session storage");
+            sessionStorage.removeItem("token");
+            login.innerHTML = "login";
+          }
+    });
+
+    modifyHeaderEdition.innerHTML = headerModeEdition;
+    header.style.marginTop = "100px";
+
+    for (let i = 0; i < modifyButtonEdition.length; i++) {
+        modifyButtonEdition[i].innerHTML = modifyModeEdition;
+    }
+
+    displayAddWorkInterface();
+}
+
+function displayAddWorkInterface(){
+    console.log("Ouverture de l'interface de l'ajout de projet");
+    
+    const test = document.createElement("div");
+    test.classList.add("addWorkModalInterface");
+    body.appendChild(test);
+    addWorkModalInterface = document.querySelector(".addWorkModalInterface");
+    const truc = `
+        <p id="modalTitle">Galerie photo</p>
+        <div class="modalWorks">
+            
+        </div>
+        <button id="addWorksButton">Ajouter une photo</button>
+        <p id="deleteWorksButton">Supprimer la galerie</p>
+    `;
+    addWorkModalInterface.innerHTML = truc;
+    const modalWorks = document.querySelector(".modalWorks"); //test modale
+}
+
+displayAddWorkButton.addEventListener("click", function() { //quand modifier est cliqué
+    overlay.style.display = "block"; 
+    addWorkModalInterface.style.display = "block";
+});

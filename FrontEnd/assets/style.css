@@ -309,7 +309,7 @@ footer{
 	cursor: pointer;
 }
 
-.edition{
+#edition{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -323,11 +323,15 @@ footer{
 	gap: 21px;
 }
 
+#edition div .fa-pen-to-square{
+	color: white;
+}
+
 .fa-pen-to-square{
 	width: 16px;
 	height: 16px;
 }
-
+ 
 .textEdition{
 	color: white;
 	font-family: 'Work Sans';
@@ -338,7 +342,7 @@ footer{
 	text-align: center;
 }
 
-.edition div{
+#edition div{
 	display: flex;
 	flex-direction: row;
 	gap: 12px;
@@ -356,4 +360,83 @@ footer{
 	font-size: 14px;
 	line-height: 16px;
 	text-align: center;
+}
+
+.modifier{
+	display: flex;
+}
+
+#ajouterProjet:hover{
+	cursor: pointer;
+	font-weight: 600;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: none;
+  }
+
+  .addWorkModalInterface{
+	display: none;
+	position: fixed;
+	z-index: 3;
+	width: 630px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	text-align: center;
+	padding-left: 105px;
+	padding-right: 105px;
+	border-radius: 10px;
+  }
+
+  #modalTitle{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+  }
+
+  .modalWorks{
+	border-bottom: 1px solid #B3B3B3;
+  }
+
+  #addWorksButton{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	padding-left: 49px;
+	padding-right: 49px;
+	height: 36px;
+	text-align: center;
+	border-radius: 60px ;
+	transition: background-color 0.1s;
+	border:none;
+  }
+
+  #deleteWorksButton{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	/* identical to box height */
+
+	text-align: center;
+
+	color: #D65353;
+}
+
+.modalWorks img{
+	width: 50px;
 }
