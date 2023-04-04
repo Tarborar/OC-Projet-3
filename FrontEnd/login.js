@@ -61,22 +61,3 @@ function displaySubmitError(errorType){
       console.log("on ne connait pas l'erreur");
   }
 }
-  
-const headerModeEdition = `
-  <div id="edition">
-    <div>
-      <i class="fa-regular fa-pen-to-square"></i>
-      <p class="textEdition">Mode édition</p>
-    </div>
-    <button class="buttonEdition">publier les changements</button>
-  </div>
-`;
-
-
-const modifierModeEdition = `
-<div class="modifier">
-  <i class="fa-regular fa-pen-to-square"></i>
-  <p class="textModifier">modifier</p>
-</div>
-`
-

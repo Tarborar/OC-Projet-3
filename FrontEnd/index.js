@@ -12,6 +12,7 @@ const body = document.querySelector("body");
 let works;
 let categories;
 let filtersName;
+let whichFilterActive = 0;
 let editMode = false;
 let addWorkModalInterface;
 
@@ -55,7 +56,7 @@ async function fetchWorks(filteredWorks){
     }
 }
 
-function displayWorks(works){ //reçois tous les works OU les filtredWorks
+function displayWorks(works){ //reçoit tous les works OU les filteredWorks
     for (let i = 0; i < works.length; i++){
         const project = works[i];
         const photoElement = document.createElement("figure");
@@ -82,7 +83,7 @@ function displayWorks(works){ //reçois tous les works OU les filtredWorks
     }
 }
 
-function displayFilters(filtersName){
+function displayFilters(filtersName){ //reçoit le tableau de tous les noms de Filtre
     const ulFilter = document.createElement("ul");
     ulFilter.classList.add("rangeFiltre", "fontFiltre");
     
@@ -91,9 +92,21 @@ function displayFilters(filtersName){
         liFilter.innerText = filtersName[i];
         liFilter.classList.add ("boutonFiltre");
         ulFilter.appendChild(liFilter);
+
+        //pour chaque <li> attribue un event Click
+        liFilter.addEventListener("click", () => {
+            whichFilterActive = i;
+            
+            for (let i = 0; i < filtersName.length; i++) { //enlève toutes les class filtreActive
+            ulFilter.children[i].classList.remove("filtreActive");
+            }
+    
+            //remet la class filtreActive au Click actuel
+            liFilter.classList.add("filtreActive");
+        });
     }
     
-    ulFilter.children[0].classList.add("filtreActive"); //filtreActive sur le premier filtre "Tous"
+    ulFilter.children[whichFilterActive].classList.add("filtreActive"); //filtreActive sur le premier filtre "Tous"
     
     filters.appendChild(ulFilter);
     /*
@@ -116,8 +129,6 @@ function filtering(){
             const filterValue = button.innerText;
             console.log(`Le filtre ${button.innerText} a été cliqué`);
             
-            // filterButtons.forEach(b => b.classList.remove("filtreActive")); //supprime tous les filtreActive
-            // button.classList.add("filtreActive"); //met filtreActive sur le filtre cliqué
 
             let filteredWorks;
             if (filterValue === "Tous"){
@@ -125,7 +136,7 @@ function filtering(){
             } else{
                 filteredWorks = works.filter(work => work.category.name === filterValue); //catégorie égal au nom du bouton
             }
-
+            
             fetchWorks(filteredWorks);
         });
     }); 

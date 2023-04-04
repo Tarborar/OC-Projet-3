@@ -221,6 +221,10 @@ nav ul li:hover {
 .remplissage {
 	width: 50%;
 	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .remplissage > * {
 	text-align: center;
@@ -228,6 +232,16 @@ nav ul li:hover {
 }
 .remplissage h2{
 	margin-bottom: 20px;
+}
+
+form{
+	display: flex;
+	justify-content: center;
+	width: 379px;
+}
+
+#titleForm{
+	margin-bottom: 0px;
 }
 .remplissage form {
 	text-align: left;
@@ -238,6 +252,7 @@ nav ul li:hover {
 
 .remplissage input {
 	height: 50px;
+	/* width: 379px; */
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -292,7 +307,6 @@ footer{
 	left: 0;
 	right: 0;
 	width: 100%;
-
 }
 
 #loginPage{
