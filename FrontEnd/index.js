@@ -16,12 +16,18 @@ const selectFilter = document.querySelector("#selectFilter");
 const addWorksButton = document.querySelector("#addWorksButton");
 const modalAdd = document.querySelector(".modalAdd");
 const returnModalButton = document.querySelector("#returnModalButton");
+const inputFileButton = document.querySelector("#inputFileButton");
+const blocAjout = document.querySelector(".blocAjout");
+const titleInput = document.querySelector("#titleInput");
+const addWorkForm = document.querySelector("#addWorkForm");
 
 let works;
 let categories;
 let filtersName;
 let whichFilterActive = 0;
 let editMode = false;
+let imageUrl;
+let id;
 
 const errorMessage = `
     <p class="messageErreur">
@@ -49,6 +55,10 @@ async function fetchWorks(filteredWorks){
         filtersName.unshift("Tous"); //ajoute "Tous" dans les filtres
         console.log("Récupération de tous les filtres :");
         console.log(filtersName);
+
+        id = works.map(work => work.id); // créé un tableau de tous les id
+        console.log('récupération de tous les id');
+        console.log(id);
 
         if(filteredWorks != null){
             displayWorks(filteredWorks);
@@ -260,4 +270,52 @@ login.addEventListener("click", function() {
     }
 });
 
-{/* <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> */}
+/* <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> */
+
+inputFileButton.addEventListener('change', function(event){ //Si un fichier est sélectionné
+    const file = event.target.files[0];
+
+    if (file.type.startsWith('image/')){ //uniquement les images
+        imageUrl = URL.createObjectURL(file); //met le lien de l'image dans imageUrl
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.style.maxHeight = '183px';
+        blocAjout.style.padding = "0";
+        blocAjout.innerHTML = "";
+        blocAjout.appendChild(img);
+
+    } else {
+        alert('Veuillez sélectionner une image');
+    }
+});
+
+addWorkForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const token = sessionStorage.getItem('token');
+
+    if(token){
+        fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                "id": 13,
+                "title": titleInput.value,
+                "imageUrl": imageUrl,
+                "categoryId": selectFilter.value,
+                "userId": 0
+            })
+        })
+        .then(response => {
+            if (response.ok) { // statut compris entre 200 et 299
+                console.log("autorisé");
+                window.location.href = "index.html";
+                return response.json();
+            } else {
+                throw new Error("Erreur de réponse du serveur");
+            }
+        })
+    }
+});
