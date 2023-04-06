@@ -6,15 +6,17 @@ const modifyHeaderEdition = document.querySelector(".modifierHeader");
 const header = document.querySelector("header");
 const login = document.querySelector("#login");
 const displayAddWorkButton = document.querySelector("#ajouterProjet");
-const overlay = document.querySelector("#overlay");
+const modal = document.querySelector("#modal");
 const body = document.querySelector("body");
+const addWorkModalInterface = document.querySelector(".addWorkModalInterface");
+const modalWorks = document.querySelector(".modalWorks");
+const faXmark = document.querySelector(".fa-xmark");
 
 let works;
 let categories;
 let filtersName;
 let whichFilterActive = 0;
 let editMode = false;
-let addWorkModalInterface;
 
 const errorMessage = `
     <p class="messageErreur">
@@ -27,6 +29,7 @@ fetchWorks();
 async function fetchWorks(filteredWorks){
     sectionGallery.innerHTML = ""; //erase pour construire à blanc
     filters.innerHTML = "";
+    modalWorks.innerHTML = "";
 
     try{
         const response = await fetch('http://localhost:5678/api/works');
@@ -48,6 +51,10 @@ async function fetchWorks(filteredWorks){
             displayWorks(works);
         }
         
+        if (editMode === true){
+            displayAllWorksOnModal(works);
+        }
+
         displayFilters(filtersName);
 
     } catch (error){
@@ -74,12 +81,22 @@ function displayWorks(works){ //reçoit tous les works OU les filteredWorks
         </figure>
         */
 
-        if (editMode === true){
-            const modalWorks = document.querySelector(".modalWorks"); //test modale
-            const imageModale = document.createElement("img");
-            imageModale.src = project.imageUrl;
-            modalWorks.appendChild(imageModale);
-        }
+        // if (editMode === true){
+        //     const modalWorks = document.querySelector(".modalWorks"); //div des works
+        //     const imageModale = document.createElement("img");
+        //     imageModale.src = project.imageUrl;
+        //     modalWorks.appendChild(imageModale);
+        // }
+    }
+}
+
+function displayAllWorksOnModal(works){ //reçoit tous les works si editMode === true
+    for (let i = 0; i < works.length; i++){
+        const project = works[i];
+        const modalWorks = document.querySelector(".modalWorks"); //div des works
+        const imageModale = document.createElement("img");
+        imageModale.src = project.imageUrl;
+        modalWorks.appendChild(imageModale);
     }
 }
 
@@ -143,7 +160,7 @@ function filtering(){
 }
 
 if (sessionStorage.getItem('token')){
-    //Vérifie s'il y a un le token dans le session storage
+    //affiche mode edition si token présent
     console.log("Entre dans le mode édition");
     editMode = true;
     addEditionMode();
@@ -152,11 +169,11 @@ if (sessionStorage.getItem('token')){
 }
 
 function addEditionMode(){
-    const headerModeEdition = `
+    headerModeEdition = `
     <div id="edition">
         <div>
-        <i class="fa-regular fa-pen-to-square"></i>
-        <p class="textEdition">Mode édition</p>
+            <i class="fa-regular fa-pen-to-square faPenToSquare"></i>
+            <div class="textEdition">Mode édition</p>
         </div>
         <button class="buttonEdition">publier les changements</button>
     </div>
@@ -165,51 +182,42 @@ function addEditionMode(){
     const modifyModeEdition = `
     <div class="modifier">
         <i class="fa-regular fa-pen-to-square"></i>
-        <p class="textModifier">modifier</p>
+        <div class="textModifier">modifier</p>
     </div>
     `;
 
-    login.innerHTML = "logout";
-
-    login.addEventListener("click", function() {
-        if(sessionStorage.getItem("token")) {
-            // Suppression de l'élément ayant la clé "myKey"
-            console.log("Retrait du token dans le session storage");
-            sessionStorage.removeItem("token");
-            login.innerHTML = "login";
-          }
-    });
+    login.innerHTML = "logout"; //remplace login par logout
 
     modifyHeaderEdition.innerHTML = headerModeEdition;
-    header.style.marginTop = "100px";
+    header.style.marginTop = "100px"; //ajoute de la place pour le header edition
 
-    for (let i = 0; i < modifyButtonEdition.length; i++) {
+    for (let i = 0; i < modifyButtonEdition.length; i++) { //pour tous les .modifierBouton met modifyModeEdition
         modifyButtonEdition[i].innerHTML = modifyModeEdition;
     }
-
-    displayAddWorkInterface();
 }
 
-function displayAddWorkInterface(){
-    console.log("Ouverture de l'interface de l'ajout de projet");
-    
-    const test = document.createElement("div");
-    test.classList.add("addWorkModalInterface");
-    body.appendChild(test);
-    addWorkModalInterface = document.querySelector(".addWorkModalInterface");
-    const truc = `
-        <p id="modalTitle">Galerie photo</p>
-        <div class="modalWorks">
-            
-        </div>
-        <button id="addWorksButton">Ajouter une photo</button>
-        <p id="deleteWorksButton">Supprimer la galerie</p>
-    `;
-    addWorkModalInterface.innerHTML = truc;
-    const modalWorks = document.querySelector(".modalWorks"); //test modale
-}
-
-displayAddWorkButton.addEventListener("click", function() { //quand modifier est cliqué
-    overlay.style.display = "block"; 
-    addWorkModalInterface.style.display = "block";
+//affiche modale
+displayAddWorkButton.addEventListener("click", function() {
+    console.log("Ouverture de la modale");
+    fetchWorks();
+    modal.style.display = "block"; //background sombre
+    addWorkModalInterface.style.display = "block";//enlève display: none; de la modale
 });
+
+//enlève modale
+faXmark.addEventListener("click", function(){
+    console.log("Fermeture de la modale");
+    modal.style.display = "none";
+    addWorkModalInterface.style.display = "none";
+});
+
+login.addEventListener("click", function() {
+    if(sessionStorage.getItem("token")) {
+        // Suppression de l'élément ayant la clé "myKey"
+        console.log("Retrait du token dans le session storage");
+        sessionStorage.removeItem("token");
+        login.innerHTML = "login";
+        }
+});
+
+{/* <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> */}

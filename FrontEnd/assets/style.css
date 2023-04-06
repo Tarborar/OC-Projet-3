@@ -121,10 +121,9 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	gap: 41px;
 }
 nav li {
-	padding: 0 10px;
 	font-size: 1.2em;
 }
 
@@ -132,6 +131,11 @@ nav ul li:hover {
 	color: #B1663C;
 	cursor: pointer;
 }
+.instagramLogo{
+	width: 21px;
+	height: 21px;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -147,19 +151,19 @@ nav ul li:hover {
 	width: 80%;
 }
 
+#modifierIntro{
+	margin-top: 16px;
+	margin-left: 74px;
+}
+
 #introduction article {
 	flex: 1
 }
-#introduction h2 {
-	margin-bottom: 1em;
-}
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 51px;
 }
 
 .filtres{
@@ -278,21 +282,24 @@ form{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.bouton{
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+}
+
+.bouton:hover{
+	cursor: pointer;
+	background-color: #0E2F28;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
-	text-align: center;
 	border-radius: 60px ;
 	transition: background-color 0.1s;
-}
-
-input[type="submit"]:hover{
-	cursor: pointer;
-	background-color: #0E2F28;
 }
 
 footer nav ul {
@@ -341,11 +348,26 @@ footer{
 	color: white;
 }
 
+.presentation{
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.pWidth{
+	width: 404px;
+}
+
 .fa-pen-to-square{
-	width: 16px;
-	height: 16px;
+	font-size: 16px;
+	margin-right: 9px;
 }
  
+.textModifier{
+	display: flex;
+	align-items: center;
+}
+
 .textEdition{
 	color: white;
 	font-family: 'Work Sans';
@@ -354,6 +376,13 @@ footer{
 	font-size: 16px;
 	line-height: 19px;
 	text-align: center;
+	display: flex;
+	align-items: center;
+}
+
+.faPenToSquare{
+	display: flex;
+	align-items: center;
 }
 
 #edition div{
@@ -380,12 +409,23 @@ footer{
 	display: flex;
 }
 
+#alignementModifierProjet{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 51px;
+}
+
+.titleProjet{
+	margin-right: 34px;
+}
+
 #ajouterProjet:hover{
 	cursor: pointer;
 	font-weight: 600;
 }
 
-#overlay {
+#modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -396,7 +436,7 @@ footer{
 	display: none;
   }
 
-  .addWorkModalInterface{
+.addWorkModalInterface{
 	display: none;
 	position: fixed;
 	z-index: 3;
@@ -405,52 +445,83 @@ footer{
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
-	text-align: center;
-	padding-left: 105px;
-	padding-right: 105px;
 	border-radius: 10px;
-  }
+}
 
-  #modalTitle{
+#alignementCroixModale{
+	text-align: right;
+}
+
+.fa-xmark{
+	color: black;
+	width: 12px;
+	height: 12px;
+	margin: 12px; /*carré de 24px*/
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.fa-xmark:hover{
+	cursor: pointer;
+	color: #B1663C;
+}
+
+#modalTitle{
 	font-family: 'Work Sans';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 26px;
 	line-height: 30px;
+	margin-bottom: 46px;
+	text-align: center;
   }
 
-  .modalWorks{
+.modalWorks{
 	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 47px;
+	margin-left: 105px;
+	margin-right: 105px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
   }
 
-  #addWorksButton{
+#addWorksButton{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: auto;
 	padding-left: 49px;
 	padding-right: 49px;
 	height: 36px;
-	text-align: center;
 	border-radius: 60px ;
 	transition: background-color 0.1s;
 	border:none;
-  }
+	margin-top: 38px;
+}
 
-  #deleteWorksButton{
+#addWorksButton:hover{
+	cursor: pointer;
+	background-color: #0E2F28;
+}
+
+#deleteWorksButton{
 	font-family: 'Syne';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 17px;
-	/* identical to box height */
-
+	margin-top: 23px;
+	margin-bottom: 48px;
 	text-align: center;
-
 	color: #D65353;
 }
 
 .modalWorks img{
-	width: 50px;
+	width: 78px;
+	position: relative;
 }
