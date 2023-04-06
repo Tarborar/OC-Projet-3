@@ -10,7 +10,12 @@ const modal = document.querySelector("#modal");
 const body = document.querySelector("body");
 const addWorkModalInterface = document.querySelector(".addWorkModalInterface");
 const modalWorks = document.querySelector(".modalWorks");
-const faXmark = document.querySelector(".fa-xmark");
+const modalGalery = document.querySelector(".modalGalery");
+const faXmarks = document.querySelectorAll(".fa-xmark");
+const selectFilter = document.querySelector("#selectFilter");
+const addWorksButton = document.querySelector("#addWorksButton");
+const modalAdd = document.querySelector(".modalAdd");
+const returnModalButton = document.querySelector("#returnModalButton");
 
 let works;
 let categories;
@@ -30,6 +35,7 @@ async function fetchWorks(filteredWorks){
     sectionGallery.innerHTML = ""; //erase pour construire à blanc
     filters.innerHTML = "";
     modalWorks.innerHTML = "";
+    selectFilter.innerHTML = "";
 
     try{
         const response = await fetch('http://localhost:5678/api/works');
@@ -53,6 +59,7 @@ async function fetchWorks(filteredWorks){
         
         if (editMode === true){
             displayAllWorksOnModal(works);
+            displayAllFiltersOnModal(filtersName);
         }
 
         displayFilters(filtersName);
@@ -98,6 +105,24 @@ function displayAllWorksOnModal(works){ //reçoit tous les works si editMode ===
         imageModale.src = project.imageUrl;
         modalWorks.appendChild(imageModale);
     }
+}
+
+function displayAllFiltersOnModal(filtersName){ //affiche les filtres dans le select du modale
+    
+    const option = document.createElement("option"); //désactive la première option
+    option.value = "";
+    option.text = "";
+    option.disabled = true;
+    option.selected = true;
+    selectFilter.appendChild(option);
+
+    for (let i = 1; i < filtersName.length; i++){
+        const option = document.createElement("option");
+        option.innerText = filtersName[i];
+        selectFilter.appendChild(option);
+    }
+
+    
 }
 
 function displayFilters(filtersName){ //reçoit le tableau de tous les noms de Filtre
@@ -202,13 +227,28 @@ displayAddWorkButton.addEventListener("click", function() {
     fetchWorks();
     modal.style.display = "block"; //background sombre
     addWorkModalInterface.style.display = "block";//enlève display: none; de la modale
+    modalGalery.style.display = "block";
+});
+
+addWorksButton.addEventListener("click", function(){
+    modalGalery.style.display = "none";
+    modalAdd.style.display = "block";
+});
+
+returnModalButton.addEventListener("click", function(){
+    modalGalery.style.display = "block";
+    modalAdd.style.display = "none";
 });
 
 //enlève modale
-faXmark.addEventListener("click", function(){
-    console.log("Fermeture de la modale");
-    modal.style.display = "none";
-    addWorkModalInterface.style.display = "none";
+faXmarks.forEach(function(faXmark){
+    faXmark.addEventListener("click", function(){
+        console.log("Fermeture de la modale");
+        modal.style.display = "none";
+        addWorkModalInterface.style.display = "none";
+        modalGalery.style.display = "none";
+        modalAdd.style.display = "none";
+    });
 });
 
 login.addEventListener("click", function() {
@@ -217,7 +257,7 @@ login.addEventListener("click", function() {
         console.log("Retrait du token dans le session storage");
         sessionStorage.removeItem("token");
         login.innerHTML = "login";
-        }
+    }
 });
 
 {/* <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> */}

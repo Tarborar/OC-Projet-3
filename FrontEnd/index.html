@@ -77,16 +77,43 @@
 </main>
 
 <div class="addWorkModalInterface">
-	<div>
+	<div class="modalGalery">
 		<div id="alignementCroixModale">
-		<i class="fa-solid fa-xmark"></i>
-	</div>
-	<p id="modalTitle">Galerie photo</p>
-	<div class="modalWorks">
+			<i class="fa-solid fa-xmark"></i>
+		</div>
+		<p class="modalTitle">Galerie photo</p>
+		<div class="modalWorks">
 		
+		</div>
+		<button id="addWorksButton" class="bouton">Ajouter une photo</button>
+		<p id="deleteWorksButton">Supprimer la galerie</p>
 	</div>
-	<button id="addWorksButton" class="bouton">Ajouter une photo</button>
-	<p id="deleteWorksButton">Supprimer la galerie</p>
+
+	<div class="modalAdd">
+		<div id="alignementHautModale">
+			<i class="fa-solid fa-arrow-left" id="returnModalButton"></i>
+			<i class="fa-solid fa-xmark"></i>
+		</div>
+		<p class="modalTitle">Ajout photo</p>
+		<form action="" class="formAdd">
+			<div class="blocAjout">
+				<i class="fa-sharp fa-regular fa-image"></i>
+				<label for="file-upload" class="addFileButton">+ Ajouter photo</label>
+				<input type="file" name="file-upload" accept="image/*" id="inputFileButton">
+				<p class="imageRecommended">jpg, png : 4mo max</p>
+			</div>
+			<label for="select-title" class="labelTitle">Titre</label>
+			<input type="text" name="select-title" class="inputTitle">
+
+			<label for="select-filter" class="labelTitle">Catégorie</label>
+			<select name="select-filter" id="selectFilter">
+			
+			</select>
+			<div id="test"></div>
+			<input type="submit" value="Valider">
+
+		</form>
+		
 	</div>
 	
 </div>
