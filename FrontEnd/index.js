@@ -28,6 +28,7 @@ let whichFilterActive = 0;
 let editMode = false;
 let imageUrl;
 let id;
+let test;
 
 const errorMessage = `
     <p class="messageErreur">
@@ -128,11 +129,10 @@ function displayAllFiltersOnModal(filtersName){ //affiche les filtres dans le se
 
     for (let i = 1; i < filtersName.length; i++){
         const option = document.createElement("option");
+        option.value = i;
         option.innerText = filtersName[i];
         selectFilter.appendChild(option);
     }
-
-    
 }
 
 function displayFilters(filtersName){ //reçoit le tableau de tous les noms de Filtre
@@ -274,6 +274,7 @@ login.addEventListener("click", function() {
 
 inputFileButton.addEventListener('change', function(event){ //Si un fichier est sélectionné
     const file = event.target.files[0];
+    test = file;
 
     if (file.type.startsWith('image/')){ //uniquement les images
         imageUrl = URL.createObjectURL(file); //met le lien de l'image dans imageUrl
@@ -292,22 +293,19 @@ inputFileButton.addEventListener('change', function(event){ //Si un fichier est 
 addWorkForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const token = sessionStorage.getItem('token');
+    const formData = new FormData(); //pour envoie du fichier binaire pour l'image
+    formData.append("image", test); // imageFile est une variable contenant le fichier binaire de l'image
+    formData.append("title", titleInput.value);
+    formData.append("category", parseInt(selectFilter.value));
 
     if(token){
         fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
-                "id": 13,
-                "title": titleInput.value,
-                "imageUrl": imageUrl,
-                "categoryId": selectFilter.value,
-                "userId": 0
+            body: formData
             })
-        })
         .then(response => {
             if (response.ok) { // statut compris entre 200 et 299
                 console.log("autorisé");
