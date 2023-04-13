@@ -28,7 +28,7 @@ let whichFilterActive = 0;
 let editMode = false;
 let imageUrl;
 let id;
-let test;
+let file;
 
 const errorMessage = `
     <p class="messageErreur">
@@ -92,6 +92,7 @@ function displayWorks(works){ //reçoit tous les works OU les filteredWorks
         sectionGallery.appendChild(photoElement);
         photoElement.appendChild(imageElement);
         photoElement.appendChild(textElement);
+
         /* 
         <figure>
             <img src="" alt="">
@@ -113,9 +114,58 @@ function displayAllWorksOnModal(works){ //reçoit tous les works si editMode ===
         const project = works[i];
         const modalWorks = document.querySelector(".modalWorks"); //div des works
         const imageModale = document.createElement("img");
+        const editImage = document.createElement("div");
+        const div = document.createElement("div"); //pour l'icon poubelle
+        div.classList.add("bin");
+        div.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        editImage.classList.add("editImage");
+        editImage.setAttribute('data-work-id', project.id); // ajouter l'id unique à la div
         imageModale.src = project.imageUrl;
-        modalWorks.appendChild(imageModale);
+        editImage.appendChild(imageModale);
+        editImage.appendChild(div);
+        modalWorks.appendChild(editImage);
+
+        /*
+        <div class="editImage" data-work-id="work_id">
+            <img src="">
+            <div class="bin">
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+        </div>
+        */
     }
+
+    const deleteWorkButton = document.querySelectorAll(".bin");
+
+    deleteWorkButton.forEach(bin => {
+            bin.addEventListener("click", (event) =>{
+                event.preventDefault();
+                const token = sessionStorage.getItem('token');
+                const workId = bin.closest('.editImage').dataset.workId; // récupérer l'id unique de la div parent
+
+                if(token){
+                    fetch(`http://localhost:5678/api/works/${workId}`, { // utiliser l'id unique pour envoyer la requête de suppression
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                          throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                      })
+                      .then(data => {
+                        console.log(data);
+                      })
+                      .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                      });
+                    
+                }
+            });
+        });
 }
 
 function displayAllFiltersOnModal(filtersName){ //affiche les filtres dans le select du modale
@@ -273,8 +323,7 @@ login.addEventListener("click", function() {
 /* <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> */
 
 inputFileButton.addEventListener('change', function(event){ //Si un fichier est sélectionné
-    const file = event.target.files[0];
-    test = file;
+    file = event.target.files[0];
 
     if (file.type.startsWith('image/')){ //uniquement les images
         imageUrl = URL.createObjectURL(file); //met le lien de l'image dans imageUrl
@@ -294,7 +343,7 @@ addWorkForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const token = sessionStorage.getItem('token');
     const formData = new FormData(); //pour envoie du fichier binaire pour l'image
-    formData.append("image", test); // imageFile est une variable contenant le fichier binaire de l'image
+    formData.append("image", file); // imageFile est une variable contenant le fichier binaire de l'image
     formData.append("title", titleInput.value);
     formData.append("category", parseInt(selectFilter.value));
 

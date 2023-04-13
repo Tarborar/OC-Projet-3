@@ -561,7 +561,7 @@ footer{
 	color: #306685;
 }
 
-#test{
+#serapationModale{
 	border-bottom: 1px solid #B3B3B3;
 	padding-bottom: 47px;
 }
@@ -633,5 +633,30 @@ color: #444444;
 
 .modalWorks img{
 	width: 78px;
+}
+
+.editImage{
 	position: relative;
+}
+
+.bin{
+	position: absolute;
+	width: 17px;
+	height: 17px;
+	background-color: black;
+	top: 5px;
+	right: 5px;
+	border-radius: 2px;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bin:hover{
+	cursor: pointer;
+}
+
+.fa-trash-can{
+	font-size: 9px;
 }
