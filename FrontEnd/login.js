@@ -33,7 +33,6 @@ form.addEventListener("submit", (event) => {
   .then(response =>{
     if (response.ok) { // statut compris entre 200 et 299
       console.log("autorisé");
-      window.location.href = "index.html";
       return response.json();
     } else {
       displaySubmitError(response.status);
@@ -42,6 +41,7 @@ form.addEventListener("submit", (event) => {
   .then(data => {
     const token = data.token;
     sessionStorage.setItem("token", data.token);
+    window.location.href = "index.html";
   })
   .catch(error => console.error(error));
 });
