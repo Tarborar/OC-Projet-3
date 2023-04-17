@@ -27,7 +27,7 @@ let filtersName;
 let whichFilterActive = 0;
 let editMode = false;
 let imageUrl;
-let id;
+let Id;
 let file;
 
 const errorMessage = `
@@ -57,9 +57,9 @@ async function fetchWorks(filteredWorks){
         console.log("Récupération de tous les filtres :");
         console.log(filtersName);
 
-        id = works.map(work => work.id); // créé un tableau de tous les id
+        Id = works.map(work => work.id); // créé un tableau de tous les id
         console.log('récupération de tous les id');
-        console.log(id);
+        console.log(Id);
 
         if(filteredWorks != null){
             displayWorks(filteredWorks);
@@ -69,6 +69,7 @@ async function fetchWorks(filteredWorks){
         }
         
         if (editMode === true){
+            filters.style.display = "none";
             displayAllWorksOnModal(works);
             displayAllFiltersOnModal(filtersName);
         }
