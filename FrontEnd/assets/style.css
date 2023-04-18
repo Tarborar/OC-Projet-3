@@ -223,6 +223,8 @@ nav ul li:hover {
 	gap: 20px;
 	justify-content: flex-start;
 	flex-wrap: wrap;
+	align-items: center;
+	margin-left: 102px;
 }
 
 .gallery img {
@@ -537,8 +539,25 @@ footer{
 	margin-right: 105px;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 6px;
+	gap: 6.23px;
+	max-height: 378.75px;
+	overflow-y: auto;
 }
+
+.modalWorks::-webkit-scrollbar {
+	width: 5px; /* largeur de la barre de défilement */
+	position: absolute;
+	left: 0;
+  }
+  
+  .modalWorks::-webkit-scrollbar-track {
+	background: #f1f1f1; /* couleur de l'arrière-plan de la barre de défilement */
+  }
+  
+  .modalWorks::-webkit-scrollbar-thumb {
+	background-color: #888; /* couleur de la poignée de la barre de défilement */
+	border-radius: 5px; /* arrondi de la poignée de la barre de défilement */
+  }
 
 .blocAjout{
 	display: flex;
@@ -549,6 +568,12 @@ footer{
 	padding-top: 28px;
 	padding-bottom: 19px;
 	margin-bottom: 30px;
+}
+
+.blocAjout label:hover{
+	cursor: pointer;
+	background-color: #d1dee7;
+	transition: 0.1s;
 }
 
 #titleInput{
@@ -581,9 +606,9 @@ footer{
 	padding-bottom: 47px;
 }
 
-/* input[type="file"]:hover::before {
-	border-color: black;
-} */
+input[type="file"]:hover{
+	cursor: pointer;
+}
 
 .imageRecommended{
 	font-family: 'Work Sans';
@@ -611,22 +636,18 @@ color: #444444;
 	margin-bottom: 21px;
 }
 
-#addWorksButton{
+.modaleBouton{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
 	margin: auto;
-	padding-left: 49px;
-	padding-right: 49px;
-	height: 36px;
-	border-radius: 60px ;
-	transition: background-color 0.1s;
+	width: 237px;
 	border:none;
 	margin-top: 38px;
+}
+
+#validerModaleBouton{
+	margin-bottom: 55px;
 }
 
 #addWorksButton:hover{
