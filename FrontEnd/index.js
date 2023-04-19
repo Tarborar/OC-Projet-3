@@ -285,7 +285,7 @@ function addEditionMode(){
 //affiche modale
 displayAddWorkButton.addEventListener("click", function() {
     console.log("Ouverture de la modale");
-    fetchWorks();
+    // fetchWorks();
     modal.style.display = "block"; //background sombre
     addWorkModalInterface.style.display = "block";//enlève display: none; de la modale
     modalGalery.style.display = "block";
@@ -311,6 +311,16 @@ faXmarks.forEach(function(faXmark){
         modalAdd.style.display = "none";
     });
 });
+
+window.onclick = function(event) { //fermeture de la modale hors focus
+    if (event.target == modal) {
+        console.log("Fermeture de la modale");
+        modal.style.display = "none";
+        addWorkModalInterface.style.display = "none";
+        modalGalery.style.display = "none";
+        modalAdd.style.display = "none";
+    }
+}
 
 login.addEventListener("click", function() {
     if(sessionStorage.getItem("token")) {
