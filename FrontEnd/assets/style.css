@@ -229,6 +229,8 @@ nav ul li:hover {
 
 .gallery img {
 	height: 410px;
+	width: 307px;
+	object-fit: cover;
 }
 
 .remplissage {
@@ -669,6 +671,8 @@ color: #444444;
 
 .modalWorks img{
 	width: 78px;
+	height: 104px;
+	object-fit: cover;
 }
 
 .editImage{
